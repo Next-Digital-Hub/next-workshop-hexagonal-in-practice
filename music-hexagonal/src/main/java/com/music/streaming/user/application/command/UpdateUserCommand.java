@@ -1,6 +1,6 @@
 package com.music.streaming.user.application.command;
 
-import com.music.streaming.user.application.port.UserRepositoryPort;
+import com.music.streaming.user.application.port.UserRepository;
 import com.music.streaming.user.domain.InvalidUserException;
 import com.music.streaming.user.domain.User;
 import com.music.streaming.user.domain.UserNotFoundException;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @SuperBuilder
 public class UpdateUserCommand {
     @NonNull
-    final UserRepositoryPort userRepository;
+    final UserRepository userRepository;
     @NonNull
     final String id;
     final String username;

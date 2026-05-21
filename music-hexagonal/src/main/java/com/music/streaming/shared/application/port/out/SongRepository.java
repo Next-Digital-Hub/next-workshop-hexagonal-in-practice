@@ -1,6 +1,6 @@
-package com.music.streaming.catalog.application.port;
+package com.music.streaming.shared.application.port.out;
 
-import com.music.streaming.catalog.domain.Song;
+import com.music.streaming.shared.domain.Song;
 
 import java.util.List;
 import java.util.Optional;

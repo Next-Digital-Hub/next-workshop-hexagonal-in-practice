@@ -5,7 +5,7 @@ import com.music.streaming.user.domain.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepositoryPort {
+public interface UserRepository {
     List<User> getUsers();
     Optional<User> getUserById(String id);
     Optional<User> getUserByEmail(String email);

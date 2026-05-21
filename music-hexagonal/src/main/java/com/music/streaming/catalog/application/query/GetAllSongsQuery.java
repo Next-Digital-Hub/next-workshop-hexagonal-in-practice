@@ -1,7 +1,7 @@
 package com.music.streaming.catalog.application.query;
 
-import com.music.streaming.catalog.application.port.SongRepository;
-import com.music.streaming.catalog.domain.Song;
+import com.music.streaming.shared.application.port.out.SongRepository;
+import com.music.streaming.shared.domain.Song;
 import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 

@@ -1,6 +1,6 @@
 package com.music.streaming.catalog.infrastructure.repository.mapper;
 
-import com.music.streaming.catalog.domain.Song;
+import com.music.streaming.shared.domain.Song;
 import com.music.streaming.catalog.infrastructure.repository.entity.SongEntity;
 import org.mapstruct.Mapper;
 

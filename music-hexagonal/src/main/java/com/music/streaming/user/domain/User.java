@@ -3,6 +3,7 @@ package com.music.streaming.user.domain;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -16,4 +17,10 @@ public class User {
     String username;
     @With
     String email;
+    @With
+    List<String> favouriteSongs;
+
+    public void addFavouriteSong(String songId) {
+        this.favouriteSongs.add(songId);
+    }
 }

@@ -1,6 +1,6 @@
 package com.music.streaming.user.infrastructure.repository;
 
-import com.music.streaming.user.application.port.UserRepositoryPort;
+import com.music.streaming.user.application.port.UserRepository;
 import com.music.streaming.user.domain.User;
 import com.music.streaming.user.infrastructure.repository.entity.UserEntity;
 import com.music.streaming.user.infrastructure.repository.mapper.UserEntityMapper;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepositoryAdapter implements UserRepositoryPort {
+public class UserRepositoryAdapter implements UserRepository {
     final UserEntityMapper userEntityMapper;
     final UserJpaRepository userJpaRepository;
 

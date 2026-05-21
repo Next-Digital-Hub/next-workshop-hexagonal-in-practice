@@ -1,4 +1,4 @@
-package com.music.streaming.catalog.domain;
+package com.music.streaming.shared.domain;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;

@@ -3,7 +3,7 @@ package com.music.streaming.user.infrastructure.rest;
 import com.music.streaming.user.application.command.CreateUserCommand;
 import com.music.streaming.user.application.command.DeleteUserCommand;
 import com.music.streaming.user.application.command.UpdateUserCommand;
-import com.music.streaming.user.application.port.UserRepositoryPort;
+import com.music.streaming.user.application.port.UserRepository;
 import com.music.streaming.user.application.query.GetAllUsersQuery;
 import com.music.streaming.user.application.query.GetUserByIdQuery;
 import com.music.streaming.user.domain.DuplicatedUserException;
@@ -28,11 +28,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     final UserFacadeMapper userFacadeMapper;
-    final UserRepositoryPort userRepositoryPort;
+    final UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity getAllUsers() {
-        List<User> users = GetAllUsersQuery.builder().userRepository(userRepositoryPort).build().execute();
+        List<User> users = GetAllUsersQuery.builder().userRepository(userRepository).build().execute();
         if (users.isEmpty()) return ResponseEntity.noContent().build();
         List<GetUserResponseDTO> usersResponse = users.stream().map(userFacadeMapper::fromDomain).toList();
         return ResponseEntity.ok(usersResponse);
@@ -42,7 +42,7 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody PostUserRequestDTO userDto) {
         try {
             String id = CreateUserCommand.builder()
-                    .userRepository(userRepositoryPort)
+                    .userRepository(userRepository)
                     .username(userDto.getUsername())
                     .email(userDto.getEmail())
                     .build().handle();
@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity getUserById(@PathVariable String id) {
-        Optional<User> user = GetUserByIdQuery.builder().userRepository(userRepositoryPort).id(id).build().execute();
+        Optional<User> user = GetUserByIdQuery.builder().userRepository(userRepository).id(id).build().execute();
         return user.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(userFacadeMapper.fromDomain(user.get()));
     }
 
@@ -64,7 +64,7 @@ public class UserController {
     public ResponseEntity updateUser(@PathVariable String id, @RequestBody PatchUserRequestDTO userDto) {
         try {
             UpdateUserCommand.builder()
-                    .userRepository(userRepositoryPort)
+                    .userRepository(userRepository)
                     .id(id)
                     .username(userDto.getUsername())
                     .email(userDto.getEmail())
@@ -80,7 +80,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable String id) {
         try {
-            DeleteUserCommand.builder().userRepository(userRepositoryPort).id(id).build().handle();
+            DeleteUserCommand.builder().userRepository(userRepository).id(id).build().handle();
         } catch (InvalidUserException e) {
             return ResponseEntity.unprocessableEntity().build();
         } catch (UserNotFoundException e) {

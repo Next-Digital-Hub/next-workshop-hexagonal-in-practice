@@ -1,9 +1,9 @@
 package com.music.streaming.catalog.application.command;
 
-import com.music.streaming.catalog.application.port.SongRepository;
+import com.music.streaming.shared.application.port.out.SongRepository;
 import com.music.streaming.catalog.domain.InvalidSongException;
-import com.music.streaming.catalog.domain.Song;
-import com.music.streaming.catalog.domain.SongNotFoundException;
+import com.music.streaming.shared.domain.Song;
+import com.music.streaming.shared.domain.SongNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

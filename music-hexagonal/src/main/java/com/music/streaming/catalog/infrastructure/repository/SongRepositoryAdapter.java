@@ -1,7 +1,7 @@
 package com.music.streaming.catalog.infrastructure.repository;
 
-import com.music.streaming.catalog.application.port.SongRepository;
-import com.music.streaming.catalog.domain.Song;
+import com.music.streaming.shared.application.port.out.SongRepository;
+import com.music.streaming.shared.domain.Song;
 import com.music.streaming.catalog.infrastructure.repository.entity.SongEntity;
 import com.music.streaming.catalog.infrastructure.repository.mapper.SongEntityMapper;
 import lombok.RequiredArgsConstructor;
