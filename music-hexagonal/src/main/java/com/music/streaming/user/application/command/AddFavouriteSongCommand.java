@@ -3,6 +3,7 @@ package com.music.streaming.user.application.command;
 import com.music.streaming.shared.domain.SongNotFoundException;
 import com.music.streaming.shared.application.port.out.SongRepository;
 import com.music.streaming.shared.domain.Song;
+import com.music.streaming.user.application.port.NotificationService;
 import com.music.streaming.user.application.port.UserRepository;
 import com.music.streaming.user.domain.User;
 import com.music.streaming.user.domain.UserNotFoundException;
@@ -16,9 +17,10 @@ public class AddFavouriteSongCommand {
     // TODO implement port and adapter
     private final NotificationService notificationService;
 
-    public AddFavouriteSongCommand(UserRepository userRepository, SongRepository songRepository) {
+    public AddFavouriteSongCommand(UserRepository userRepository, SongRepository songRepository, NotificationService notificationService) {
         this.userRepository = userRepository;
         this.songRepository = songRepository;
+        this.notificationService = notificationService;
     }
 
     private String userId;
@@ -36,8 +38,11 @@ public class AddFavouriteSongCommand {
         }
 
         // TODO add validation so that user didn't reach favourite songs limit
-
-        user.get().addFavouriteSong(songId);
-        userRepository.updateUser(user.get());
+        if (user.get().getFavouriteSongs().size() >= User.MAX_FAV_SONGS)
+            notificationService.sendAlert("Max favourite songs reached, upgrade to premium to add more songs to favourites");
+        else {
+            user.get().addFavouriteSong(songId);
+            userRepository.updateUser(user.get());
+        }
     }
 }
