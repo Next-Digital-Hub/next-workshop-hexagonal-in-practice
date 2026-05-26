@@ -20,6 +20,8 @@ public class User {
     @With
     List<String> favouriteSongs;
 
+    public static final int MAX_FAV_SONGS=10;
+
     public void addFavouriteSong(String songId) {
         this.favouriteSongs.add(songId);
     }
